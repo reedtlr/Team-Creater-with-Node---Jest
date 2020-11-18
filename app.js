@@ -13,7 +13,7 @@ const render = require("./lib/htmlRenderer");
 const prompt = inquirer.createPromptModule();
 
 // questions for user
-const employee = [
+const questions = [
     {
         name: 'name',
         message: `What is your manager's name?`,
@@ -32,7 +32,7 @@ const employee = [
       },
   ];
 
-
+prompt(questions)
 
 // Write code to use inquirer to gather information about the development team members,
 // and to create objects for each team member (using the correct classes as blueprints!)
