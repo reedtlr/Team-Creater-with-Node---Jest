@@ -83,17 +83,16 @@ class CreatePromptModule {
         })
         .then ((results) => {
             if (results.roleChoice == "Engineer") {
-               return new runEngineer();
+               return runEngineer();
             } else if (results.roleChoice == "Intern") {
-               return new runIntern();
+               return runIntern();
             } else {
                 return render();
             }
-            return this.nextChoice();
         })
     }
-    runEngineer = async () => {
-        const answers = await inquirer
+    runEngineer = () => {
+        return inquirer
             .prompt([{
                 name: "name",
                 message: `What is your engineer's name?`,
@@ -109,11 +108,13 @@ class CreatePromptModule {
             {
                 name: "github",
                 message: "what is your engineer's GitHub user name?",
-            }]);
-        const manager = new Engineer(answers);
-        return this.nextChoice();
+            }])
+            .then((answers) => {
+                const engineer = new Engineer(answers);
+                return this.nextChoice();
+            });
     }
-    runIntern = async () => {
+    runIntern = () => {
         return inquirer
         .prompt ([{
                 name: "name",
@@ -132,11 +133,12 @@ class CreatePromptModule {
                 message: "what school does your intern attend?",
             }])
             .then((answers) => {
-            const manager = new Intern(answers);
+            const intern = new Intern(answers);
             return this.nextChoice();
         });
     }
 }
+
 
 
 var init = new CreatePromptModule();
