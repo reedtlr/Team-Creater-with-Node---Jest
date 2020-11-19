@@ -12,4 +12,4 @@ This is a team page creator using Node.js and Jest for testing. The types of emp
 Project is created with:
 * Javascript
 * Node.js, Inquirer
-*Jest
+* Jest
