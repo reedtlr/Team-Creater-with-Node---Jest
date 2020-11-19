@@ -42,8 +42,7 @@ const questions = [
     },
   ];
 
-
-
+// begins by asking for inifmation about the manager for the team
 class CreatePromptModule {
     constructor() {
         this.role = 'Employee'
@@ -77,9 +76,9 @@ class CreatePromptModule {
             return nextChoice();
         });
     }
-    
 }
 
+// prompts the user to select the rest of the team members and create them
 const nextChoice = () => {
     return inquirer
     .prompt ({
@@ -98,7 +97,6 @@ const nextChoice = () => {
             // let result = () => {render(employee)};
             // result(employee);
             return writeFile(render(employee));
-
         }
     })
 }
@@ -153,6 +151,7 @@ const  runIntern = () => {
     });
 }
 
+// write the file to 'output' folder
 const writeFile = (data) => {
     console.log(data);
     fs.writeFile(outputPath, data, (err) => {
@@ -163,4 +162,5 @@ const writeFile = (data) => {
 
 var init = new CreatePromptModule();
 
+// starts application 
 init.start();
