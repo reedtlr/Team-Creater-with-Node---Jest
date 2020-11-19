@@ -94,8 +94,11 @@ const nextChoice = () => {
         } else if (results.roleChoice == "Intern") {
            return runIntern();
         } else {
-            console.log(employee)
-            return render(employee);
+            console.log(employee);
+            // let result = () => {render(employee)};
+            // result(employee);
+            return writeFile(render(employee));
+
         }
     })
 }
@@ -147,6 +150,14 @@ const  runIntern = () => {
         const intern = new Intern(answers);
         employee.push(intern);
         return nextChoice();
+    });
+}
+
+const writeFile = (data) => {
+    console.log(data);
+    fs.writeFile(outputPath, data, (err) => {
+        if (err) throw err;
+        console.log('file created');
     });
 }
 
