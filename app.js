@@ -70,76 +70,78 @@ class CreatePromptModule {
             }])
             .then((answers) => {
             const manager = new Manager(answers);
-            return this.nextChoice();
+            return nextChoice();
         });
     }
-    nextChoice = () => {
-        return inquirer
-        .prompt ({
-            type: "list",
-            name: "roleChoice",
-            message: "Which type of team member would you like to add?",
-            choices: ["Engineer", "Intern", `I don't want to add any more team members`]
-        })
-        .then ((results) => {
-            if (results.roleChoice == "Engineer") {
-               return runEngineer();
-            } else if (results.roleChoice == "Intern") {
-               return runIntern();
-            } else {
-                return render();
-            }
-        })
-    }
-    runEngineer = () => {
-        return inquirer
-            .prompt([{
-                name: "name",
-                message: `What is your engineer's name?`,
-            },
-            {
-                name: "id",
-                message: `What is your engineer's id?`,
-            },
-            {
-                name: "email",
-                message: `What is your engineer's email`,
-            },
-            {
-                name: "github",
-                message: "what is your engineer's GitHub user name?",
-            }])
-            .then((answers) => {
-                const engineer = new Engineer(answers);
-                return this.nextChoice();
-            });
-    }
-    runIntern = () => {
-        return inquirer
-        .prompt ([{
-                name: "name",
-                message: `What is your intern's name?`,
-            },
-            {
-                name: "id",
-                message: `What is your intern's id?`,
-            },
-            {
-                name: "email",
-                message: `What is your intern's email`,
-            },
-            {
-                name: "school",
-                message: "what school does your intern attend?",
-            }])
-            .then((answers) => {
-            const intern = new Intern(answers);
-            return this.nextChoice();
-        });
-    }
+    
 }
 
+const nextChoice = () => {
+    return inquirer
+    .prompt ({
+        type: "list",
+        name: "roleChoice",
+        message: "Which type of team member would you like to add?",
+        choices: ["Engineer", "Intern", `I don't want to add any more team members`]
+    })
+    .then ((results) => {
+        if (results.roleChoice == "Engineer") {
+           return runEngineer();
+        } else if (results.roleChoice == "Intern") {
+           return runIntern();
+        } else {
+            return render();
+        }
+    })
+}
 
+const runEngineer = () => {
+    return inquirer
+        .prompt([{
+            name: "name",
+            message: `What is your engineer's name?`,
+        },
+        {
+            name: "id",
+            message: `What is your engineer's id?`,
+        },
+        {
+            name: "email",
+            message: `What is your engineer's email`,
+        },
+        {
+            name: "github",
+            message: "what is your engineer's GitHub user name?",
+        }])
+        .then((answers) => {
+            const engineer = new Engineer(answers);
+            return nextChoice();
+        });
+}
+
+const  runIntern = () => {
+    return inquirer
+    .prompt ([{
+            name: "name",
+            message: `What is your intern's name?`,
+        },
+        {
+            name: "id",
+            message: `What is your intern's id?`,
+        },
+        {
+            name: "email",
+            message: `What is your intern's email`,
+        },
+        {
+            name: "school",
+            message: "what school does your intern attend?",
+        }])
+        .then((answers) => {
+        const intern = new Intern(answers);
+        return nextChoice();
+    });
+}
 
 var init = new CreatePromptModule();
 
