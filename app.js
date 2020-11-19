@@ -49,12 +49,27 @@ class createPromptModule {
     }
 
     initialScreen() {
+        console.log("please build your team.");
         inquirer
         .prompt ({
-                type: "list",
-                name: "openQuestion",
-                message: ""
-            }) 
+                name: "name",
+                message: `What is your manager's name?`,
+            },
+            {
+                name: "id",
+                message: `What is your manager's id?`,
+            },
+            {
+                name: "email",
+                message: `What is your maanger's email`,
+            },
+            {
+                name: "officeNumber",
+                message: "what is your manager's office number?",
+            })
+        .then (answers, () => {
+            Manager(answers);
+        })
     }
 }
 
