@@ -12,6 +12,8 @@ const render = require("./lib/htmlRenderer");
 
 const prompt = inquirer.createPromptModule();
 
+const employee = []
+
 // questions for user
 const questions = [
     {
@@ -39,6 +41,7 @@ const questions = [
         message: `What school to they attend?`,
     },
   ];
+
 
 
 class CreatePromptModule {
@@ -70,6 +73,7 @@ class CreatePromptModule {
             }])
             .then((answers) => {
             const manager = new Manager(answers);
+            employee.push(manager);
             return nextChoice();
         });
     }
@@ -90,7 +94,7 @@ const nextChoice = () => {
         } else if (results.roleChoice == "Intern") {
            return runIntern();
         } else {
-            return render();
+            return render(employee);
         }
     })
 }
@@ -115,6 +119,7 @@ const runEngineer = () => {
         }])
         .then((answers) => {
             const engineer = new Engineer(answers);
+            employee.push(engineer);
             return nextChoice();
         });
 }
@@ -139,6 +144,7 @@ const  runIntern = () => {
         }])
         .then((answers) => {
         const intern = new Intern(answers);
+        employee.push(intern);
         return nextChoice();
     });
 }
