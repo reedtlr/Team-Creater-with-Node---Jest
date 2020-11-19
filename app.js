@@ -72,7 +72,7 @@ class CreatePromptModule {
                 message: "what is your manager's office number?",
             }])
             .then((answers) => {
-            const manager = new Manager(answers);
+            const manager = new Manager(answers.name, answers.id, answers.email, answers.officeNumber);
             employee.push(manager);
             return nextChoice();
         });
@@ -122,7 +122,7 @@ const runEngineer = () => {
             message: "what is your engineer's GitHub user name?",
         }])
         .then((answers) => {
-            const engineer = new Engineer(answers);
+            const engineer = new Engineer(answers.name, answers.id, answers.email, answers.github);
             employee.push(engineer);
             return nextChoice();
         });
@@ -147,7 +147,7 @@ const  runIntern = () => {
             message: "what school does your intern attend?",
         }])
         .then((answers) => {
-        const intern = new Intern(answers);
+        const intern = new Intern(answers.name, answers.id, answers.email, answers.school);
         employee.push(intern);
         return nextChoice();
     });
