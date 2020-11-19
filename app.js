@@ -94,7 +94,8 @@ const nextChoice = () => {
         } else if (results.roleChoice == "Intern") {
            return runIntern();
         } else {
-            return render(employee);
+            console.log(employee)
+            return this.render(employee);
         }
     })
 }
