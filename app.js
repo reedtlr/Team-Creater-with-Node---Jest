@@ -40,18 +40,19 @@ const questions = [
     },
   ];
 
-class createPromptModule {
+
+class CreatePromptModule {
     constructor() {
         this.role = 'Employee'
     }
     start() {
-        this.initialScreen();
+        return this.initialScreen();
     }
 
     initialScreen() {
         console.log("please build your team.");
-        inquirer
-        .prompt ({
+        return inquirer
+        .prompt ([{
                 name: "name",
                 message: `What is your manager's name?`,
             },
@@ -66,34 +67,81 @@ class createPromptModule {
             {
                 name: "officeNumber",
                 message: "what is your manager's office number?",
-            })
-        .then (answers, () => {
-            Manager(answers);
-            nextChoice();
-        })
+            }])
+            .then((answers) => {
+            const manager = new Manager(answers);
+            return this.nextChoice();
+        });
     }
     nextChoice = () => {
-        inquirer
+        return inquirer
         .prompt ({
             type: "list",
             name: "roleChoice",
             message: "Which type of team member would you like to add?",
             choices: ["Engineer", "Intern", `I don't want to add any more team members`]
         })
-        .then (results, () => {
+        .then ((results) => {
             if (results.roleChoice == "Engineer") {
-                Engineer();
+               return new runEngineer();
             } else if (results.roleChoice == "Intern") {
-                Intern();
+               return new runIntern();
             } else {
                 return render();
             }
-            return nextChoice();
+            return this.nextChoice();
         })
+    }
+    runEngineer = async () => {
+        const answers = await inquirer
+            .prompt([{
+                name: "name",
+                message: `What is your engineer's name?`,
+            },
+            {
+                name: "id",
+                message: `What is your engineer's id?`,
+            },
+            {
+                name: "email",
+                message: `What is your engineer's email`,
+            },
+            {
+                name: "github",
+                message: "what is your engineer's GitHub user name?",
+            }]);
+        const manager = new Engineer(answers);
+        return this.nextChoice();
+    }
+    runIntern = async () => {
+        return inquirer
+        .prompt ([{
+                name: "name",
+                message: `What is your intern's name?`,
+            },
+            {
+                name: "id",
+                message: `What is your intern's id?`,
+            },
+            {
+                name: "email",
+                message: `What is your intern's email`,
+            },
+            {
+                name: "school",
+                message: "what school does your intern attend?",
+            }])
+            .then((answers) => {
+            const manager = new Intern(answers);
+            return this.nextChoice();
+        });
     }
 }
 
 
+var init = new CreatePromptModule();
+
+init.start();
 
 // Write code to use inquirer to gather information about the development team members,
 // and to create objects for each team member (using the correct classes as blueprints!)
