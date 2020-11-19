@@ -16,23 +16,49 @@ const prompt = inquirer.createPromptModule();
 const questions = [
     {
         name: 'name',
-        message: `What is your manager's name?`,
+        message: `What is their name?`,
       },
       {
           name: 'id',
-          message: `What is your manager's id?`,
+          message: `What is their id?`,
       },
       {
           name: 'email',
-          message: `What is your manager's email?`,
+          message: `What is their email?`,
       },
       {
-          name: 'number',
-          message: `What is your manager's office number?`,
+          name: 'officeNumber',
+          message: `What is their office number?`,
       },
+      {
+        name: 'gitub',
+        message: `What is their GitHub user name?`,
+    },
+    {
+        name: 'school',
+        message: `What school to they attend?`,
+    },
   ];
 
-prompt(questions);
+class createPromptModule {
+    constructor() {
+        this.role = 'Employee'
+    }
+    start() {
+        this.initialScreen();
+    }
+
+    initialScreen() {
+        inquirer
+        .prompt ({
+                type: "list",
+                name: "openQuestion",
+                message: ""
+            }) 
+    }
+}
+
+
 
 // Write code to use inquirer to gather information about the development team members,
 // and to create objects for each team member (using the correct classes as blueprints!)
