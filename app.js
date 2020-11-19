@@ -69,6 +69,26 @@ class createPromptModule {
             })
         .then (answers, () => {
             Manager(answers);
+            nextChoice();
+        })
+    }
+    nextChoice = () => {
+        inquirer
+        .prompt ({
+            type: "list",
+            name: "roleChoice",
+            message: "Which type of team member would you like to add?",
+            choices: ["Engineer", "Intern", `I don't want to add any more team members`]
+        })
+        .then (results, () => {
+            if (results.roleChoice == "Engineer") {
+                Engineer();
+            } else if (results.roleChoice == "Intern") {
+                Intern();
+            } else {
+                return render();
+            }
+            return nextChoice();
         })
     }
 }
