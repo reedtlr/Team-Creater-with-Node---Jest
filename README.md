@@ -1,5 +1,8 @@
 # Team-Creater-with-Node---Jest
-This is a team page creator
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+
+
+This is an employee team page creator
 ## Table of contents
 * [General info](#general-info)
 * [Technologies](#technologies)
